@@ -257,6 +257,14 @@ class SignedJwtAssertionCredentialsTests(unittest.TestCase):
       ])
     http = credentials.authorize(http)
     resp, content = http.request('http://example.org')
+    http = HttpMockSequence([
+      ({'status': '200'}, '{"access_token":"1/3w","expires_in":3600}'),
+      ({'status': '401'}, ''),
+      ({'status': '200'}, '{"access_token":"3/3w","expires_in":3600}'),
+      ({'status': '200'}, 'echo_request_headers'),
+      ])
+    http = credentials.refresh(http)
+    resp, content = http.request('http://example.org')
     return content
 
   def test_credentials_refresh_without_storage(self):
