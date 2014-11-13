@@ -47,10 +47,6 @@ with information from the APIs Console <https://code.google.com/apis/console>.
 
 """
 
-# argparser is an ArgumentParser that contains command-line options expected
-# by tools.run(). Pass it in as part of the 'parents' argument to your own
-# ArgumentParser.
-argparser = _CreateArgumentParser()
 
 def _CreateArgumentParser():
   try:
@@ -69,6 +65,12 @@ def _CreateArgumentParser():
                                   'CRITICAL'],
                          help='Set the logging level of detail.')
   return argparser
+
+
+# argparser is an ArgumentParser that contains command-line options expected
+# by tools.run(). Pass it in as part of the 'parents' argument to your own
+# ArgumentParser.
+argparser = _CreateArgumentParser()
 
 
 class ClientRedirectServer(BaseHTTPServer.HTTPServer):
